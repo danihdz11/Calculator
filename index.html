@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./styles/index.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="title-text">Monolith Cal</div>
+        <nav class="menu">
+            <a href="./index.html">Calculator</a>
+            <a href="./history.html">History</a>
+        </nav>
+        <div class="settings">
+            <img src="/images/settings.png" alt="settings">
+        </div>
+    </header>
+    
+    <div class="main-container">
+        <div class="main-screen" id="screen"></div>
+        <div class="operation-text" id="screen2"></div>
+
+        <div class="btn-container"> 
+            <button class="btn btn-special" onclick="erase()">AC</button>
+            <button class="btn btn-special" onclick="handleClick('%')">%</button>
+            <button class="btn btn-special" onclick="handleClick('^')">^</button>
+            <button class="btn btn-op" onclick="handleClick('/')">÷</button>
+        </div>
+
+        <div class="btn-container"> 
+            <button class="btn btn-numbers" onclick="handleClick(7)">7</button>
+            <button class="btn btn-numbers" onclick="handleClick(8)">8</button>
+            <button class="btn btn-numbers" onclick="handleClick(9)">9</button>
+            <button class="btn btn-op" onclick="handleClick('x')">x</button>
+        </div>
+
+        <div class="btn-container">
+            <button class="btn btn-numbers" onclick="handleClick(4)">4</button>
+            <button class="btn btn-numbers" onclick="handleClick(5)">5</button>
+            <button class="btn btn-numbers" onclick="handleClick(6)">6</button>
+            <button class="btn btn-op" onclick="handleClick('-')">−</button>
+        </div>
+        <div class="btn-container">
+            <button class="btn btn-numbers" onclick="handleClick(1)">1</button>
+            <button class="btn btn-numbers" onclick="handleClick(2)">2</button>
+            <button class="btn btn-numbers" onclick="handleClick(3)">3</button>
+            <button class="btn btn-op" onclick="handleClick('+')">+</button>
+        </div>
+        <div class="btn-container last-row">
+            <button class="btn btn-numbers zero" onclick="handleClick(0)">0</button>
+            <button class="btn btn-numbers" onclick="handleClick('.')">.</button>
+            <button class="btn btn-op" onclick="calculate('=')">=</button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
