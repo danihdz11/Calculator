@@ -4,6 +4,21 @@ let isOp = false
 
 function handleClick(number) {
 
+    if (number === 'DEL') {
+        if (fullOp.length === 0)return;
+        fullOp = fullOp.slice(0, -1);
+        isOp = false;
+        for (let i = 1; i < fullOp.length; i++) {
+            const c = fullOp[i];
+            if (c === '+' || c === 'x' || c === '/' || c === '^' || c === '-') {
+                isOp = true;
+                break;
+            }
+        }
+        showNumber1(fullOp);
+        return;
+    }
+
     if (isOp && (number === '+' | number == '-' | number == '/' | number == 'x')) {
         return;
     }
@@ -45,8 +60,6 @@ function calculate() {
         case "^":
             res = Math.pow(Number(a), Number(b))
             break
-        case "%":
-            res = 10-2
         default:
             break
     }
