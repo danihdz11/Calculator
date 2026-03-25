@@ -117,6 +117,11 @@ body {
     text-decoration: none;
 }
 
+.menu a.active {
+    color: #FF6D00;
+    text-decoration: underline;
+}
+
 .settings img {
     cursor: pointer;
     width: 24px;
