@@ -19,11 +19,21 @@ function handleClick(number) {
         return;
     }
 
-    if (isOp && (number === '+' | number == '-' | number == '/' | number == 'x')) {
+    if (fullOp === "" && (number === "+" || number === "x" || number === "/" || number === "^")) {
         return;
     }
 
-    if (number === '+' | number == '-' | number == '/' | number == 'x') {
+    if (number === "-" && (fullOp === "" || /[+\-x/^]$/.test(fullOp))) {
+        fullOp = fullOp + number;
+        showNumber1(fullOp);
+        return;
+    }
+
+    if (isOp && (number === '+' || number == '-' || number == '/' || number == 'x')) {
+        return;
+    }
+
+    if (number === '+' || number == '-' || number == '/' || number == 'x') {
         isOp = true;
     }
 
@@ -42,9 +52,11 @@ function erase() {
 
 function calculate() {
     console.log(fullOp);
-    const [a,op,b] = fullOp.split(/(\+|-|x|\/|\^)/gm);
-    console.log({a, op, b});
-    switch(op){
+    const m = fullOp.match(/^(-?\d+(?:\.\d+)?)([+\-x\/^])(.+)$/);
+    if (!m) return;
+    const [, a, op, b] = m;
+    console.log({ a, op, b });
+    switch (op) {
         case "+":
             res = Number(a) + Number(b)
             break
@@ -63,8 +75,9 @@ function calculate() {
         default:
             break
     }
+    res = Number(res.toFixed(2))
     isOp = false
-    showNumber2(res);
+    showNumber2(res)
 }
 
 function showNumber1(n) {
