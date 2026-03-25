@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History</title>
+    <title>History — Monolith Cal</title>
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="stylesheet" href="./styles/history.css">
 </head>
@@ -15,8 +15,103 @@
             <a href="./history.html" class="active">History</a>
         </nav>
         <div class="settings">
-            <img src="/images/settings.png" alt="settings">
+            <img src="/images/settings.png" alt="Settings">
         </div>
     </header>
+
+    <main class="main-container-history">
+        <div class="history-inner">
+            <label class="search" for="history-search">
+                <span class="search-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </span>
+                <input type="search" id="history-search" class="search-input" placeholder="Search calculations..." autocomplete="off">
+            </label>
+
+            <div class="history-section-head">
+                <span class="section-label">RECENT OPERATIONS</span>
+                <span class="section-total"><span id="history-count">12</span> TOTAL</span>
+            </div>
+
+            <div class="history-scroll">
+                <ul class="history-list" id="history-list">
+                    <li>
+                        <article class="history-card">
+                            <div class="history-card-top">
+                                <span class="history-expr">1,250 × 4.5</span>
+                                <time class="history-time" datetime="14:22">14:22</time>
+                            </div>
+                            <div class="history-card-result">
+                                <span class="history-eq">=</span>
+                                <span class="history-value">5,625</span>
+                            </div>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="history-card">
+                            <div class="history-card-top">
+                                <span class="history-expr">√144 + 2²</span>
+                                <time class="history-time" datetime="12:05">12:05</time>
+                            </div>
+                            <div class="history-card-result">
+                                <span class="history-eq">=</span>
+                                <span class="history-value">16</span>
+                            </div>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="history-card">
+                            <div class="history-card-top">
+                                <span class="history-expr">(450 − 80) ÷ 5</span>
+                                <time class="history-time" datetime="09:18">09:18</time>
+                            </div>
+                            <div class="history-card-result">
+                                <span class="history-eq">=</span>
+                                <span class="history-value">74</span>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+
+                <div class="history-divider" role="separator"><span>YESTERDAY</span></div>
+
+                <ul class="history-list history-list--after-divider">
+                    <li>
+                        <article class="history-card">
+                            <div class="history-card-top">
+                                <span class="history-expr">15% × 240</span>
+                                <time class="history-time" datetime="2025-10-24">Oct 24</time>
+                            </div>
+                            <div class="history-card-result">
+                                <span class="history-eq">=</span>
+                                <span class="history-value">36</span>
+                            </div>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="history-card">
+                            <div class="history-card-top">
+                                <span class="history-expr">2,000 ÷ 8</span>
+                                <time class="history-time" datetime="2025-10-24">Oct 24</time>
+                            </div>
+                            <div class="history-card-result">
+                                <span class="history-eq">=</span>
+                                <span class="history-value">250</span>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="btn-clear-history" id="btn-clear-history">
+                <span class="btn-clear-icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                </span>
+                Clear History
+            </button>
+        </div>
+    </main>
+
+    <script src="./script.js"></script>
 </body>
 </html>

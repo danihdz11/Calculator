@@ -74,3 +74,33 @@ function showNumber1(n) {
 function showNumber2(n) {
     document.getElementById("screen2").innerHTML = n;
 }
+
+function initHistorySearch() {
+    const searchInput = document.getElementById('history-search');
+    if (!searchInput) return;
+
+    const countEl = document.getElementById('history-count');
+
+    function updateHistoryCount() {
+        const n = [...document.querySelectorAll('.history-list li')].filter(
+            (li) => li.style.display !== 'none'
+        ).length;
+        if (countEl) countEl.textContent = String(n);
+    }
+
+    function filterHistory() {
+        const q = searchInput.value.toLowerCase().trim();
+        document.querySelectorAll('.history-list li').forEach((li) => {
+            const card = li.querySelector('.history-card');
+            if (!card) return;
+            const match = !q || card.textContent.toLowerCase().includes(q);
+            li.style.display = match ? '' : 'none';
+        });
+        updateHistoryCount();
+    }
+
+    searchInput.addEventListener('input', filterHistory);
+    updateHistoryCount();
+}
+
+initHistorySearch();
