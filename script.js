@@ -1,6 +1,7 @@
 let fullOp = '';
 let res = 0;
 let isOp = false
+let justCalculated = false
 let historyOps = JSON.parse(localStorage.getItem("historyOps") || "[]");
 
 function handleClick(number) {
@@ -16,7 +17,11 @@ function handleClick(number) {
                 break;
             }
         }
-        showNumber1(fullOp);
+        if (justCalculated) {
+            showNumber2(fullOp);
+        } else {
+            showNumber1(fullOp);
+        }
         return;
     }
 
@@ -49,6 +54,7 @@ function handleClick(number) {
     }
 
     console.log(number);
+    justCalculated = false;
     fullOp = fullOp + number
     showNumber1(fullOp);
 }
@@ -59,6 +65,7 @@ function erase() {
     fullOp = ''
     isOp = false
     res = 0
+    justCalculated = false
 }
 
 function calculate() {
@@ -89,15 +96,17 @@ function calculate() {
     res = Number(res.toFixed(2))
     saveHistory(fullOp, res);
     isOp = false
-    showNumber2(res)
+    justCalculated = true
+    showNumber2(fullOp)
+    showNumber1(res)
 }
 
 function showNumber1(n) {
-    document.getElementById("screen").innerHTML = n;
+    document.getElementById("screen2").innerHTML = n;
 }
 
 function showNumber2(n) {
-    document.getElementById("screen2").innerHTML = n;
+    document.getElementById("screen").innerHTML = n;
 }
 
 function saveHistory(expression, result) {
