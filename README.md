@@ -16,3 +16,6 @@
 ## Deleted history
 ![Deleted history](./images/calculadora3.png)
 
+## Prototype of stitch
+![Prototype of stitch](./images/stitch.png)
+

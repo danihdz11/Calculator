@@ -119,6 +119,8 @@ function saveHistory(expression, result) {
     localStorage.setItem("historyOps", JSON.stringify(historyOps));
 }
 
+//ayuda de IA en las siguientes funciones
+
 function renderHistory() {
     const historyList = document.getElementById("history-list");
     if (!historyList) return;
