@@ -29,6 +29,16 @@ function handleClick(number) {
         return;
     }
 
+    if (number === ".") {
+        const lastPart = fullOp.split(/[+\-x/^]/).pop();
+        if (lastPart.includes(".")) return;
+        if (lastPart === "") {
+            fullOp = fullOp + "0.";
+            showNumber1(fullOp);
+            return;
+        }
+    }
+
     if (isOp && (number === '+' || number == '-' || number == '/' || number == 'x')) {
         return;
     }
@@ -52,7 +62,7 @@ function erase() {
 
 function calculate() {
     console.log(fullOp);
-    const m = fullOp.match(/^(-?\d+(?:\.\d+)?)([+\-x\/^])(.+)$/);
+    const m = fullOp.match(/^(-?\d+(?:\.\d+)?)([+\-x\/^])(-?\d+(?:\.\d+)?)$/);
     if (!m) return;
     const [, a, op, b] = m;
     console.log({ a, op, b });
