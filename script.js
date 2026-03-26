@@ -1,6 +1,7 @@
 let fullOp = '';
 let res = 0;
 let isOp = false
+let historyOps = JSON.parse(localStorage.getItem("historyOps") || "[]");
 
 function handleClick(number) {
 
@@ -86,6 +87,7 @@ function calculate() {
             break
     }
     res = Number(res.toFixed(2))
+    saveHistory(fullOp, res);
     isOp = false
     showNumber2(res)
 }
@@ -96,6 +98,39 @@ function showNumber1(n) {
 
 function showNumber2(n) {
     document.getElementById("screen2").innerHTML = n;
+}
+
+function saveHistory(expression, result) {
+    const now = new Date();
+    historyOps.unshift({
+        expression,
+        result,
+        time: now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    });
+    localStorage.setItem("historyOps", JSON.stringify(historyOps));
+}
+
+function renderHistory() {
+    const historyList = document.getElementById("history-list");
+    if (!historyList) return;
+    historyList.innerHTML = "";
+
+    historyOps.forEach((item) => {
+        historyList.innerHTML += `
+            <li>
+                <article class="history-card">
+                    <div class="history-card-top">
+                        <span class="history-expr">${item.expression}</span>
+                        <time class="history-time">${item.time}</time>
+                    </div>
+                    <div class="history-card-result">
+                        <span class="history-eq">=</span>
+                        <span class="history-value">${item.result}</span>
+                    </div>
+                </article>
+            </li>
+        `;
+    });
 }
 
 function initHistorySearch() {
@@ -126,4 +161,17 @@ function initHistorySearch() {
     updateHistoryCount();
 }
 
+function initHistoryActions() {
+    const clearBtn = document.getElementById("btn-clear-history");
+    if (!clearBtn) return;
+    clearBtn.addEventListener("click", () => {
+        historyOps = [];
+        localStorage.setItem("historyOps", JSON.stringify(historyOps));
+        renderHistory();
+        initHistorySearch();
+    });
+}
+
+renderHistory();
+initHistoryActions();
 initHistorySearch();
