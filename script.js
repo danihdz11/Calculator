@@ -7,6 +7,9 @@ let historyOps = JSON.parse(localStorage.getItem("historyOps") || "[]");
 function handleClick(number) {
 
     if (number === 'DEL') {
+        if (justCalculated) {
+            return;
+        }
         if (fullOp.length === 0)return;
         fullOp = fullOp.slice(0, -1);
         isOp = false;
@@ -17,11 +20,11 @@ function handleClick(number) {
                 break;
             }
         }
-        if (justCalculated) {
-            showNumber2(fullOp);
-        } else {
-            showNumber1(fullOp);
-        }
+        showNumber1(fullOp);
+        return;
+    }
+
+    if (justCalculated) {
         return;
     }
 
@@ -29,9 +32,20 @@ function handleClick(number) {
         return;
     }
 
-    if (number === "-" && (fullOp === "" || /[+\-x/^]$/.test(fullOp))) {
+    const lastChar = fullOp.slice(-1);
+
+    if (number === "-" && (fullOp === "" || "+x/^".includes(lastChar))) {
         fullOp = fullOp + number;
         showNumber1(fullOp);
+        return;
+    }
+
+    if (number === "-" && fullOp.endsWith("-")) {
+        return;
+    }
+
+    if ((number === "+" || number === "x" || number === "/" || number === "^") &&
+        (lastChar === "+" || lastChar === "x" || lastChar === "/" || lastChar === "^" || lastChar === "-")) {
         return;
     }
 
@@ -45,11 +59,11 @@ function handleClick(number) {
         }
     }
 
-    if (isOp && (number === '+' || number == '-' || number == '/' || number == 'x')) {
+    if (isOp && (number === '+' || number == '-' || number == '/' || number == 'x' || number == '^')) {
         return;
     }
 
-    if (number === '+' || number == '-' || number == '/' || number == 'x') {
+    if (number === '+' || number == '-' || number == '/' || number == 'x' || number == '^') {
         isOp = true;
     }
 
@@ -69,6 +83,9 @@ function erase() {
 }
 
 function calculate() {
+    if (justCalculated) {
+        return;
+    }
     console.log(fullOp);
     const m = fullOp.match(/^(-?\d+(?:\.\d+)?)([+\-x\/^])(-?\d+(?:\.\d+)?)$/);
     if (!m) return;
